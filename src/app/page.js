@@ -3,6 +3,7 @@
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Hero from '@/components/Hero';
+import MyServices from '@/components/MyServices';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -63,6 +64,8 @@ export default function Home() {
         experience={portfolioData.experience}
         education={portfolioData.education}
       />
+      
+      <MyServices services={portfolioData.services} />
       
       <Skills skills={portfolioData.skills} />
       

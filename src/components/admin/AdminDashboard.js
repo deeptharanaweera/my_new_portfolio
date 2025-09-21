@@ -8,6 +8,7 @@ import {
   Eye,
   GraduationCap,
   Save,
+  Settings,
   User
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -16,6 +17,7 @@ import EducationForm from './EducationForm';
 import ExperienceForm from './ExperienceForm';
 import PersonalInfoForm from './PersonalInfoForm';
 import ProjectsForm from './ProjectsForm';
+import ServicesForm from './ServicesForm';
 import SkillsForm from './SkillsForm';
 
 const AdminDashboard = () => {
@@ -72,6 +74,7 @@ const AdminDashboard = () => {
 
   const tabs = [
     { id: 'personal', label: 'Personal Info', icon: User },
+    { id: 'services', label: 'Services', icon: Settings },
     { id: 'skills', label: 'Skills', icon: Code },
     { id: 'projects', label: 'Projects', icon: Briefcase },
     { id: 'experience', label: 'Experience', icon: Briefcase },
@@ -185,6 +188,13 @@ const AdminDashboard = () => {
                     updateData('personalInfo', personalInfo);
                     updateData('socialLinks', socialLinks);
                   }}
+                />
+              )}
+              
+              {activeTab === 'services' && (
+                <ServicesForm
+                  data={portfolioData.services}
+                  onUpdate={(services) => updateData('services', services)}
                 />
               )}
               

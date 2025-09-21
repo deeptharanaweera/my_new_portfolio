@@ -1,11 +1,28 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ChevronDown, Download, Mail } from 'lucide-react';
+import { ChevronDown, Download, Github, Globe, Instagram, Linkedin, Mail, Twitter } from 'lucide-react';
+import Image from 'next/image';
 
 const Hero = ({ personalInfo, socialLinks }) => {
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const getSocialIcon = (platform) => {
+    const iconProps = { className: "w-5 h-5" };
+    switch (platform.toLowerCase()) {
+      case 'github':
+        return <Github {...iconProps} />;
+      case 'linkedin':
+        return <Linkedin {...iconProps} />;
+      case 'twitter':
+        return <Twitter {...iconProps} />;
+      case 'instagram':
+        return <Instagram {...iconProps} />;
+      default:
+        return <Globe {...iconProps} />;
+    }
   };
 
   return (
@@ -24,11 +41,21 @@ const Hero = ({ personalInfo, socialLinks }) => {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1">
-            <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span className="text-4xl font-bold text-gray-800 dark:text-white">
-                {personalInfo.name.charAt(0)}
-              </span>
+          <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1">
+            <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+              {personalInfo.avatar ? (
+                <Image 
+                  src={personalInfo.avatar} 
+                  alt={personalInfo.name}
+                  width={224}
+                  height={224}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-6xl md:text-7xl font-bold text-gray-800 dark:text-white">
+                  {personalInfo.name.charAt(0)}
+                </span>
+              )}
             </div>
           </div>
           
@@ -82,8 +109,9 @@ const Hero = ({ personalInfo, socialLinks }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 transform hover:scale-110 dark:bg-black/20 dark:border-black/30 dark:hover:bg-black/30"
+              title={platform.charAt(0).toUpperCase() + platform.slice(1)}
             >
-              <span className="text-sm font-medium capitalize">{platform}</span>
+              {getSocialIcon(platform)}
             </a>
           ))}
         </motion.div>

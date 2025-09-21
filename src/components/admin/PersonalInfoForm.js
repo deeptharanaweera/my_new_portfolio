@@ -1,6 +1,7 @@
 'use client';
 
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, X } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const PersonalInfoForm = ({ data, socialLinks, onUpdate }) => {
@@ -33,10 +34,73 @@ const PersonalInfoForm = ({ data, socialLinks, onUpdate }) => {
     onUpdate(personalInfo, updated);
   };
 
+  const handleImageUrlChange = (url) => {
+    const updated = { ...personalInfo, avatar: url };
+    setPersonalInfo(updated);
+    onUpdate(updated, socials);
+  };
+
+  const handleRemoveImage = () => {
+    const updated = { ...personalInfo, avatar: '' };
+    setPersonalInfo(updated);
+    onUpdate(updated, socials);
+  };
+
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Personal Information</h2>
+        
+        {/* Profile Image URL */}
+        <div className="mb-8">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+            Profile Image URL
+          </label>
+          <div className="flex items-center gap-6">
+            <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+              {personalInfo.avatar ? (
+                <Image 
+                  src={personalInfo.avatar} 
+                  alt="Profile" 
+                  width={96}
+                  height={96}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-2xl font-bold text-gray-500 dark:text-gray-400">
+                  {personalInfo.name?.charAt(0) || '?'}
+                </span>
+              )}
+            </div>
+            <div className="flex-1">
+              <input
+                type="url"
+                value={personalInfo.avatar || ''}
+                onChange={(e) => handleImageUrlChange(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                placeholder="https://drive.google.com/uc?id=YOUR_IMAGE_ID"
+              />
+              <div className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="mb-2">How to get Google Drive image URL:</p>
+                <ol className="list-decimal list-inside space-y-1 text-xs">
+                  <li>Upload your image to Google Drive</li>
+                  <li>Right-click the image → "Get link" → "Anyone with the link"</li>
+                  <li>Copy the link and replace "file/d/" with "uc?id=" and remove "/view"</li>
+                  <li>Example: https://drive.google.com/uc?id=YOUR_IMAGE_ID</li>
+                </ol>
+              </div>
+              {personalInfo.avatar && (
+                <button
+                  onClick={handleRemoveImage}
+                  className="mt-2 flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300"
+                >
+                  <X className="w-4 h-4" />
+                  Remove Image
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
         
         <div className="grid md:grid-cols-2 gap-6">
           <div>

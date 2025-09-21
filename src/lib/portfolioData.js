@@ -67,6 +67,50 @@ export const defaultPortfolioData = {
       duration: '2018 - 2022',
       location: 'City, Country'
     }
+  ],
+  services: [
+    {
+      id: '1',
+      title: 'Web Development',
+      description: 'Custom web applications built with modern technologies like React, Next.js, and Node.js.',
+      icon: 'code',
+      features: [
+        'Responsive Design',
+        'SEO Optimization',
+        'Performance Optimization',
+        'Cross-browser Compatibility'
+      ],
+      price: '$500+',
+      priceNote: 'Starting from'
+    },
+    {
+      id: '2',
+      title: 'UI/UX Design',
+      description: 'Beautiful and intuitive user interfaces that provide exceptional user experiences.',
+      icon: 'palette',
+      features: [
+        'User Research',
+        'Wireframing',
+        'Prototyping',
+        'Design Systems'
+      ],
+      price: '$300+',
+      priceNote: 'Starting from'
+    },
+    {
+      id: '3',
+      title: 'Mobile Development',
+      description: 'Native and cross-platform mobile applications for iOS and Android.',
+      icon: 'smartphone',
+      features: [
+        'React Native',
+        'Flutter',
+        'Native iOS/Android',
+        'App Store Deployment'
+      ],
+      price: '$800+',
+      priceNote: 'Starting from'
+    }
   ]
 };
 
@@ -137,3 +181,15 @@ export const updateProjects = async (projects) => {
     return false;
   }
 };
+
+export const updateServices = async (services) => {
+  try {
+    const docRef = doc(db, 'portfolio', 'data');
+    await updateDoc(docRef, { services });
+    return true;
+  } catch (error) {
+    console.error('Error updating services:', error);
+    return false;
+  }
+};
+
