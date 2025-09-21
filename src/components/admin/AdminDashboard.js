@@ -3,13 +3,14 @@
 import { getPortfolioData, updatePortfolioData } from '@/lib/portfolioData';
 import { motion } from 'framer-motion';
 import {
-  Briefcase,
-  Code,
-  Eye,
-  GraduationCap,
-  Save,
-  Settings,
-  User
+    Briefcase,
+    Code,
+    Eye,
+    GraduationCap,
+    Layout,
+    Save,
+    Settings,
+    User
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ThemeToggle from '../ThemeToggle';
@@ -19,6 +20,7 @@ import PersonalInfoForm from './PersonalInfoForm';
 import ProjectsForm from './ProjectsForm';
 import ServicesForm from './ServicesForm';
 import SkillsForm from './SkillsForm';
+import VisibilityForm from './VisibilityForm';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('personal');
@@ -79,6 +81,7 @@ const AdminDashboard = () => {
     { id: 'projects', label: 'Projects', icon: Briefcase },
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'education', label: 'Education', icon: GraduationCap },
+    { id: 'visibility', label: 'Page Visibility', icon: Layout },
   ];
 
   if (loading) {
@@ -223,6 +226,13 @@ const AdminDashboard = () => {
                 <EducationForm
                   data={portfolioData.education}
                   onUpdate={(education) => updateData('education', education)}
+                />
+              )}
+              
+              {activeTab === 'visibility' && (
+                <VisibilityForm
+                  data={portfolioData.visibility}
+                  onUpdate={(visibility) => updateData('visibility', visibility)}
                 />
               )}
             </motion.div>

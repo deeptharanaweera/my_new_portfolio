@@ -54,27 +54,39 @@ export default function Home() {
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <ThemeToggle />
       
-      <Hero 
-        personalInfo={portfolioData.personalInfo} 
-        socialLinks={portfolioData.socialLinks} 
-      />
+      {portfolioData.visibility?.hero && (
+        <Hero 
+          personalInfo={portfolioData.personalInfo} 
+          socialLinks={portfolioData.socialLinks} 
+        />
+      )}
       
-      <About 
-        personalInfo={portfolioData.personalInfo}
-        experience={portfolioData.experience}
-        education={portfolioData.education}
-      />
+      {portfolioData.visibility?.about && (
+        <About 
+          personalInfo={portfolioData.personalInfo}
+          experience={portfolioData.experience}
+          education={portfolioData.education}
+        />
+      )}
       
-      <MyServices services={portfolioData.services} />
+      {portfolioData.visibility?.services && (
+        <MyServices services={portfolioData.services} />
+      )}
       
-      <Skills skills={portfolioData.skills} />
+      {portfolioData.visibility?.skills && (
+        <Skills skills={portfolioData.skills} />
+      )}
       
-      <Projects projects={portfolioData.projects} />
+      {portfolioData.visibility?.projects && (
+        <Projects projects={portfolioData.projects} />
+      )}
       
-      <Contact 
-        personalInfo={portfolioData.personalInfo}
-        socialLinks={portfolioData.socialLinks}
-      />
+      {portfolioData.visibility?.contact && (
+        <Contact 
+          personalInfo={portfolioData.personalInfo}
+          socialLinks={portfolioData.socialLinks}
+        />
+      )}
     </div>
   );
 }

@@ -111,7 +111,15 @@ export const defaultPortfolioData = {
       price: '$800+',
       priceNote: 'Starting from'
     }
-  ]
+  ],
+  visibility: {
+    hero: true,
+    about: true,
+    services: true,
+    skills: true,
+    projects: true,
+    contact: true
+  }
 };
 
 // Firebase operations
