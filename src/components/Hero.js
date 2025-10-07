@@ -26,7 +26,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob dark:bg-purple-600"></div>
@@ -41,8 +41,8 @@ const Hero = ({ personalInfo, socialLinks }) => {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1">
-            <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+          <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-8 rounded-full bg-primary p-1">
+            <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
               {personalInfo.avatar ? (
                 <Image 
                   src={personalInfo.avatar} 
@@ -52,22 +52,22 @@ const Hero = ({ personalInfo, socialLinks }) => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <span className="text-6xl md:text-7xl font-bold text-gray-800 dark:text-white">
+                <span className="text-6xl md:text-7xl font-bold text-foreground">
                   {personalInfo.name.charAt(0)}
                 </span>
               )}
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-foreground">
             {personalInfo.name}
           </h1>
           
-          <h2 className="text-2xl md:text-3xl font-light text-gray-600 dark:text-gray-300 mb-6">
+          <h2 className="text-2xl md:text-3xl font-light text-muted-foreground mb-6">
             {personalInfo.title}
           </h2>
           
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
             {personalInfo.bio}
           </p>
         </motion.div>
@@ -80,7 +80,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
         >
           <button
             onClick={() => scrollToSection('contact')}
-            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <Mail className="w-5 h-5" />
             Get In Touch
@@ -89,7 +89,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
           <a
             href={personalInfo.resume}
             download
-            className="px-8 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-full font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            className="px-8 py-3 border-2 border-border text-foreground rounded-full font-medium hover:bg-muted transition-all duration-300 transform hover:scale-105 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <Download className="w-5 h-5" />
             Download Resume
@@ -108,7 +108,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 transform hover:scale-110 dark:bg-black/20 dark:border-black/30 dark:hover:bg-black/30"
+              className="w-12 h-12 bg-card/70 backdrop-blur-md border border-border rounded-full flex items-center justify-center hover:bg-card/90 transition-all duration-300 transform hover:scale-110"
               title={platform.charAt(0).toUpperCase() + platform.slice(1)}
             >
               {getSocialIcon(platform)}
@@ -122,7 +122,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1 }}
         onClick={() => scrollToSection('about')}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors duration-300"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors duration-300"
       >
         <ChevronDown className="w-8 h-8 animate-bounce" />
       </motion.button>

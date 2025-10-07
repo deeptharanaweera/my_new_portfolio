@@ -1,16 +1,18 @@
 'use client';
 
+import { useTheme } from '@/contexts/ThemeContext';
 import { getPortfolioData, updatePortfolioData } from '@/lib/portfolioData';
 import { motion } from 'framer-motion';
 import {
-    Briefcase,
-    Code,
-    Eye,
-    GraduationCap,
-    Layout,
-    Save,
-    Settings,
-    User
+  Briefcase,
+  Code,
+  Eye,
+  GraduationCap,
+  Layout,
+  Palette,
+  Save,
+  Settings,
+  User
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ThemeToggle from '../ThemeToggle';
@@ -20,9 +22,11 @@ import PersonalInfoForm from './PersonalInfoForm';
 import ProjectsForm from './ProjectsForm';
 import ServicesForm from './ServicesForm';
 import SkillsForm from './SkillsForm';
+import ThemeSettingsForm from './ThemeSettingsForm';
 import VisibilityForm from './VisibilityForm';
 
 const AdminDashboard = () => {
+  const { setThemeColors } = useTheme();
   const [activeTab, setActiveTab] = useState('personal');
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -74,6 +78,13 @@ const AdminDashboard = () => {
     }));
   };
 
+  // Apply theme colors instantly when they change in admin
+  useEffect(() => {
+    if (portfolioData?.theme) {
+      setThemeColors(portfolioData.theme);
+    }
+  }, [portfolioData?.theme, setThemeColors]);
+
   const tabs = [
     { id: 'personal', label: 'Personal Info', icon: User },
     { id: 'services', label: 'Services', icon: Settings },
@@ -82,6 +93,7 @@ const AdminDashboard = () => {
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'education', label: 'Education', icon: GraduationCap },
     { id: 'visibility', label: 'Page Visibility', icon: Layout },
+    { id: 'theme', label: 'Theme', icon: Palette },
   ];
 
   if (loading) {
@@ -106,18 +118,18 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background text-foreground">
       <ThemeToggle />
       
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-card shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Portfolio Admin</h1>
+              <h1 className="text-2xl font-bold">Portfolio Admin</h1>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">Connected</span>
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-sm text-muted-foreground">Connected</span>
               </div>
             </div>
             
@@ -126,7 +138,7 @@ const AdminDashboard = () => {
                 href="/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors duration-300"
+                className="flex items-center gap-2 px-4 py-2 text-muted-foreground hover:text-foreground transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-ring rounded-lg"
               >
                 <Eye className="w-4 h-4" />
                 View Portfolio
@@ -135,7 +147,7 @@ const AdminDashboard = () => {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-ring"
               >
                 <Save className="w-4 h-4" />
                 {saving ? 'Saving...' : 'Save Changes'}
@@ -149,8 +161,8 @@ const AdminDashboard = () => {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Navigation</h2>
+            <div className="bg-card rounded-xl shadow-lg p-6 border border-border">
+              <h2 className="text-lg font-semibold mb-4">Navigation</h2>
               
               <nav className="space-y-2">
                 {tabs.map((tab) => {
@@ -159,10 +171,10 @@ const AdminDashboard = () => {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors duration-300 ${
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors duration-300 border border-transparent focus:outline-none focus:ring-2 focus:ring-ring ${
                         activeTab === tab.id
-                          ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          ? 'bg-primary/10 text-foreground border-primary/30'
+                          : 'text-muted-foreground hover:bg-muted'
                       }`}
                     >
                       <IconComponent className="w-5 h-5" />
@@ -181,7 +193,7 @@ const AdminDashboard = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"
+              className="bg-card rounded-xl shadow-lg p-8 border border-border"
             >
               {activeTab === 'personal' && (
                 <PersonalInfoForm
@@ -233,6 +245,13 @@ const AdminDashboard = () => {
                 <VisibilityForm
                   data={portfolioData.visibility}
                   onUpdate={(visibility) => updateData('visibility', visibility)}
+                />
+              )}
+
+              {activeTab === 'theme' && (
+                <ThemeSettingsForm
+                  data={portfolioData.theme}
+                  onUpdate={(theme) => updateData('theme', theme)}
                 />
               )}
             </motion.div>

@@ -35,10 +35,10 @@ const SkillsForm = ({ data, onUpdate }) => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Skills</h2>
+        <h2 className="text-2xl font-bold">Skills</h2>
         <button
           onClick={addSkill}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-300"
         >
           <Plus className="w-4 h-4" />
           Add Skill
@@ -51,30 +51,30 @@ const SkillsForm = ({ data, onUpdate }) => {
             key={index}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl"
+          className="bg-card border border-border p-6 rounded-xl"
           >
             <div className="grid md:grid-cols-3 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Skill Name
                 </label>
                 <input
                   type="text"
                   value={skill.name || ''}
                   onChange={(e) => handleSkillChange(index, 'name', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground"
                   placeholder="e.g., JavaScript"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Category
                 </label>
                 <select
                   value={skill.category || 'Frontend'}
                   onChange={(e) => handleSkillChange(index, 'category', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground"
                 >
                   {categories.map(category => (
                     <option key={category} value={category}>{category}</option>
@@ -83,7 +83,7 @@ const SkillsForm = ({ data, onUpdate }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Proficiency Level: {skill.level || 50}%
                 </label>
                 <input
@@ -92,7 +92,7 @@ const SkillsForm = ({ data, onUpdate }) => {
                   max="100"
                   value={skill.level || 50}
                   onChange={(e) => handleSkillChange(index, 'level', parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
+                  className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer slider"
                 />
               </div>
             </div>

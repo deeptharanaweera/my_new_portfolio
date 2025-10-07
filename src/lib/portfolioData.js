@@ -3,6 +3,42 @@ import { db } from './firebase';
 
 // Default portfolio data structure
 export const defaultPortfolioData = {
+  theme: {
+    light: {
+      background: '#ffffff',
+      foreground: '#111827',
+      primary: '#3b82f6',
+      primaryForeground: '#ffffff',
+      secondary: '#6b7280',
+      secondaryForeground: '#ffffff',
+      accent: '#10b981',
+      accentForeground: '#06281f',
+      muted: '#f3f4f6',
+      mutedForeground: '#374151',
+      card: '#ffffff',
+      cardForeground: '#111827',
+      border: '#e5e7eb',
+      input: '#e5e7eb',
+      ring: '#93c5fd'
+    },
+    dark: {
+      background: '#0a0a0a',
+      foreground: '#e5e7eb',
+      primary: '#60a5fa',
+      primaryForeground: '#0b1220',
+      secondary: '#9ca3af',
+      secondaryForeground: '#0b0f19',
+      accent: '#34d399',
+      accentForeground: '#06281f',
+      muted: '#111827',
+      mutedForeground: '#9ca3af',
+      card: '#0b0f19',
+      cardForeground: '#e5e7eb',
+      border: '#1f2937',
+      input: '#374151',
+      ring: '#2563eb'
+    }
+  },
   personalInfo: {
     name: 'Your Name',
     title: 'Full Stack Developer',

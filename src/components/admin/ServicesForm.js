@@ -86,11 +86,11 @@ const ServicesForm = ({ data, onUpdate }) => {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">My Services</h2>
+        <h2 className="text-2xl font-bold">My Services</h2>
         <div className="flex gap-3">
           <button
             onClick={addService}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-300"
           >
             <Plus className="w-4 h-4" />
             Add Service
@@ -98,7 +98,7 @@ const ServicesForm = ({ data, onUpdate }) => {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-300 disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             {saving ? 'Saving...' : 'Save Changes'}
@@ -108,9 +108,9 @@ const ServicesForm = ({ data, onUpdate }) => {
 
       <div className="space-y-8">
         {services.map((service, index) => (
-          <div key={service.id || index} className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div key={service.id || index} className="bg-card rounded-lg p-6 border border-border">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              <h3 className="text-lg font-semibold">
                 Service {index + 1}
               </h3>
               <button
@@ -123,26 +123,26 @@ const ServicesForm = ({ data, onUpdate }) => {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Service Title
                 </label>
                 <input
                   type="text"
                   value={service.title || ''}
                   onChange={(e) => handleServiceChange(index, 'title', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground"
                   placeholder="e.g., Web Development"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Icon
                 </label>
                 <select
                   value={service.icon || 'code'}
                   onChange={(e) => handleServiceChange(index, 'icon', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground"
                 >
                   {iconOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -153,40 +153,40 @@ const ServicesForm = ({ data, onUpdate }) => {
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Description
                 </label>
                 <textarea
                   value={service.description || ''}
                   onChange={(e) => handleServiceChange(index, 'description', e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white resize-none"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground resize-none"
                   placeholder="Describe your service..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Price
                 </label>
                 <input
                   type="text"
                   value={service.price || ''}
                   onChange={(e) => handleServiceChange(index, 'price', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground"
                   placeholder="e.g., $500+"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Price Note
                 </label>
                 <input
                   type="text"
                   value={service.priceNote || ''}
                   onChange={(e) => handleServiceChange(index, 'priceNote', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground"
                   placeholder="e.g., Starting from"
                 />
               </div>
@@ -195,12 +195,12 @@ const ServicesForm = ({ data, onUpdate }) => {
             {/* Features */}
             <div className="mt-6">
               <div className="flex items-center justify-between mb-4">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label className="block text-sm font-medium text-muted-foreground">
                   Features
                 </label>
                 <button
                   onClick={() => addFeature(index)}
-                  className="flex items-center gap-1 px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                  className="flex items-center gap-1 px-3 py-1 text-sm bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-300"
                 >
                   <Plus className="w-3 h-3" />
                   Add Feature
@@ -214,7 +214,7 @@ const ServicesForm = ({ data, onUpdate }) => {
                       type="text"
                       value={feature}
                       onChange={(e) => handleFeatureChange(index, featureIndex, e.target.value)}
-                      className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                    className="flex-1 px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-card text-foreground"
                       placeholder="Enter feature..."
                     />
                     <button
