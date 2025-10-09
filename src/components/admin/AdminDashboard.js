@@ -128,7 +128,7 @@ const AdminDashboard = () => {
             <div className="flex items-center gap-4">
               <h1 className="text-2xl font-bold">Portfolio Admin</h1>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                 <span className="text-sm text-muted-foreground">Connected</span>
               </div>
             </div>
@@ -138,7 +138,7 @@ const AdminDashboard = () => {
                 href="/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 text-muted-foreground hover:text-foreground transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-ring rounded-lg"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-900 to-slate-700 text-white hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-ring rounded-lg border border-white/20 hover:border-white/40"
               >
                 <Eye className="w-4 h-4" />
                 View Portfolio
@@ -147,7 +147,7 @@ const AdminDashboard = () => {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-ring"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-900 text-white rounded-lg hover:opacity-90 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-ring border border-white/20 hover:border-white/40"
               >
                 <Save className="w-4 h-4" />
                 {saving ? 'Saving...' : 'Save Changes'}
@@ -173,8 +173,8 @@ const AdminDashboard = () => {
                       onClick={() => setActiveTab(tab.id)}
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors duration-300 border border-transparent focus:outline-none focus:ring-2 focus:ring-ring ${
                         activeTab === tab.id
-                          ? 'bg-primary/10 text-foreground border-primary/30'
-                          : 'text-muted-foreground hover:bg-muted'
+                          ? 'bg-primary text-primary-foreground border-primary'
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground hover:border-border'
                       }`}
                     >
                       <IconComponent className="w-5 h-5" />

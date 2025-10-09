@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code, Database, Palette, Smartphone } from 'lucide-react';
+import { Code, Database, MoveRight, Palette, Smartphone } from 'lucide-react';
 
 const Skills = ({ skills }) => {
   const skillCategories = {
@@ -50,7 +50,7 @@ const Skills = ({ skills }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
                 viewport={{ once: true }}
-                className="bg-card border border-border p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="bg-card border-2 border-border p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className={`p-3 rounded-xl bg-gradient-to-r ${gradientClass}`}>
@@ -59,7 +59,7 @@ const Skills = ({ skills }) => {
                   <h3 className="text-2xl font-bold">{category}</h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {categorySkills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.name}
@@ -69,8 +69,8 @@ const Skills = ({ skills }) => {
                       viewport={{ once: true }}
                       className="space-y-2"
                     >
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">{skill.name}</span>
+                      <div className="flex justify-between w-2/3 items-center">
+                        <span className="font-semibold">{skill.name}</span>
                         <span className="text-sm text-muted-foreground">{skill.level}%</span>
                       </div>
                       
@@ -109,7 +109,7 @@ const Skills = ({ skills }) => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:scale-105 transition-transform duration-300"
+                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-violet-600 text-white rounded-full text-sm font-medium hover:scale-105 transition-transform duration-300"
               >
                 {skill}
               </motion.span>

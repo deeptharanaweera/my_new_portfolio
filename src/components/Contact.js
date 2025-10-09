@@ -71,36 +71,36 @@ const Contact = ({ personalInfo, socialLinks }) => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="bg-card border border-border p-8 rounded-2xl shadow-lg">
+            <div className="bg-card border-2 border-border p-8 rounded-2xl shadow-lg">
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-primary/10 rounded-xl">
-                    <Mail className="w-6 h-6 text-primary" />
+                    <Mail className="w-6 h-6 text-[#D44F0D]" />
                   </div>
                   <div>
-                    <p className="text-muted-foreground text-sm">Email</p>
+                    <p className="text-muted-foreground text-sm font-bold">Email</p>
                     <p className="font-medium">{personalInfo.email}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-primary/10 rounded-xl">
-                    <Phone className="w-6 h-6 text-primary" />
+                    <Phone className="w-6 h-6 text-[#0D14D4]" />
                   </div>
                   <div>
-                    <p className="text-muted-foreground text-sm">Phone</p>
+                    <p className="text-muted-foreground text-sm font-bold">Phone</p>
                     <p className="font-medium">{personalInfo.phone}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-primary/10 rounded-xl">
-                    <MapPin className="w-6 h-6 text-primary" />
+                    <MapPin className="w-6 h-6 text-[#1ED40D]" />
                   </div>
                   <div>
-                    <p className="text-muted-foreground text-sm">Location</p>
+                    <p className="text-muted-foreground text-sm font-bold">Location</p>
                     <p className="font-medium">{personalInfo.location}</p>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ const Contact = ({ personalInfo, socialLinks }) => {
             </div>
 
             {/* Social Links */}
-            <div className="bg-card border border-border p-8 rounded-2xl">
+            <div className="bg-card border-2 border-border p-8 rounded-2xl">
               <h3 className="text-2xl font-bold mb-6">Follow Me</h3>
               
               <div className="flex flex-wrap gap-4">
@@ -120,10 +120,10 @@ const Contact = ({ personalInfo, socialLinks }) => {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                      className="flex items-center gap-3 p-4 bg-card border-2 border-[#3B0DD4] rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                     >
-                      {IconComponent && <IconComponent className="w-5 h-5 text-muted-foreground" />}
-                      <span className="font-medium capitalize">{platform}</span>
+                      {IconComponent && <IconComponent className="w-5 h-5 text-[#3B0DD4]" />}
+                      <span className="font-medium capitalize text-[#3B0DD4]">{platform}</span>
                     </a>
                   );
                 })}
@@ -137,14 +137,14 @@ const Contact = ({ personalInfo, socialLinks }) => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-          className="bg-card border border-border p-8 rounded-2xl shadow-lg"
+          className="bg-card border-2 border-border p-8 rounded-2xl shadow-lg"
           >
             <h3 className="text-2xl font-bold mb-6">Send Message</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-2">
+                  <label htmlFor="name" className="block text-sm font-semibold text-muted-foreground mb-2">
                     Name
                   </label>
                   <input
@@ -160,7 +160,7 @@ const Contact = ({ personalInfo, socialLinks }) => {
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-2">
+                  <label htmlFor="email" className="block text-sm font-semibold text-muted-foreground mb-2">
                     Email
                   </label>
                   <input
@@ -177,7 +177,7 @@ const Contact = ({ personalInfo, socialLinks }) => {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-muted-foreground mb-2">
+                <label htmlFor="subject" className="block text-sm font-semibold text-muted-foreground mb-2">
                   Subject
                 </label>
                 <input
@@ -193,7 +193,7 @@ const Contact = ({ personalInfo, socialLinks }) => {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-2">
+                <label htmlFor="message" className="block text-sm font-semibold text-muted-foreground mb-2">
                   Message
                 </label>
                 <textarea
@@ -213,7 +213,7 @@ const Contact = ({ personalInfo, socialLinks }) => {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

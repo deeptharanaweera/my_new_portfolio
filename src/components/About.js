@@ -29,31 +29,31 @@ const About = ({ personalInfo, experience, education }) => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 "
           >
-            <div className="bg-card border border-border p-8 rounded-2xl">
+            <div className="bg-card border-2 border-border p-8 rounded-2xl">
               <h3 className="text-2xl font-bold mb-6">Personal Information</h3>
               
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-primary" />
+                  <Mail className="w-5 h-5 text-orange-600" />
                   <span className="text-muted-foreground">{personalInfo.email}</span>
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-primary" />
+                  <Phone className="w-5 h-5 text-blue-500" />
                   <span className="text-muted-foreground">{personalInfo.phone}</span>
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 text-primary" />
+                  <MapPin className="w-5 h-5 text-green-500" />
                   <span className="text-muted-foreground">{personalInfo.location}</span>
                 </div>
               </div>
             </div>
 
             {/* Experience */}
-            <div className="bg-card border border-border p-8 rounded-2xl shadow-lg">
+            <div className="bg-card border-2 border-border p-8 rounded-2xl shadow-lg">
               <h3 className="text-2xl font-bold mb-6">Experience</h3>
               
               <div className="space-y-6">
@@ -64,7 +64,7 @@ const About = ({ personalInfo, experience, education }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="border-l-4 border-primary pl-6"
+                    className="border-l-4 border-[#083fe3] pl-6"
                   >
                     <h4 className="text-xl font-semibold">{exp.position}</h4>
                     <p className="text-primary font-medium">{exp.company}</p>
@@ -87,7 +87,7 @@ const About = ({ personalInfo, experience, education }) => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="bg-card border border-border p-8 rounded-2xl shadow-lg">
+            <div className="bg-card border-2 border-border p-8 rounded-2xl shadow-lg">
               <h3 className="text-2xl font-bold mb-6">Education</h3>
               
               <div className="space-y-6">
@@ -98,7 +98,7 @@ const About = ({ personalInfo, experience, education }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="border-l-4 border-primary pl-6"
+                    className="border-l-4 border-[#0dff05] pl-6"
                   >
                     <h4 className="text-xl font-semibold">{edu.degree}</h4>
                     <p className="text-primary font-medium">{edu.institution}</p>
@@ -112,8 +112,9 @@ const About = ({ personalInfo, experience, education }) => {
               </div>
             </div>
 
-            <div className="bg-card border border-border p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-6">My Story</h3>
+            <div className="bg-card border-2 border-border p-8 rounded-2xl">
+              <h3 className="text-2xl font-bold ">My Story</h3>
+              <hr className='w-20.5 mb-4 text-4xl'/>
               <p className="text-muted-foreground leading-relaxed">
                 I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. 
                 With a strong foundation in modern web technologies, I enjoy tackling complex challenges and building 

@@ -80,7 +80,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
         >
           <button
             onClick={() => scrollToSection('contact')}
-            className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring"
+            className="px-8 py-3 bg-gradient-to-r from-violet-500 to-purple-500 border-2 border-gray-500 text-white rounded-full font-medium hover:opacity-90 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <Mail className="w-5 h-5" />
             Get In Touch
@@ -108,7 +108,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 bg-card/70 backdrop-blur-md border border-border rounded-full flex items-center justify-center hover:bg-card/90 transition-all duration-300 transform hover:scale-110"
+              className="w-12 h-12 bg-card/70 text-blue-500 backdrop-blur-md border border-border rounded-full flex items-center justify-center hover:bg-card/90 transition-all duration-300 transform hover:scale-110"
               title={platform.charAt(0).toUpperCase() + platform.slice(1)}
             >
               {getSocialIcon(platform)}

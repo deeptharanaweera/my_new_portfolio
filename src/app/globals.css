@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
+/* CSS Variables base palette */
 :root {
   --background: #ffffff;
   --foreground: #111827;
-  --primary: #3b82f6;
+  --primary: #0061fc;
   --primaryForeground: #ffffff;
   --secondary: #6b7280;
   --secondaryForeground: #ffffff;
@@ -18,9 +19,26 @@
   --ring: #93c5fd;
 }
 
+/* Tailwind theme token mapping for CSS variables */
 @theme inline {
+  /* core tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--cardForeground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--mutedForeground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primaryForeground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondaryForeground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accentForeground);
+
+  /* fonts (optional) */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

@@ -34,7 +34,7 @@ const Projects = ({ projects }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-border"
+              className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-border"
             >
               <div className="relative h-64 bg-primary overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
@@ -63,7 +63,7 @@ const Projects = ({ projects }) => {
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-gradient-to-r from-amber-500 to-pink-500 text-white rounded-full text-sm font-medium"
                     >
                       {tech}
                     </span>
@@ -75,7 +75,7 @@ const Projects = ({ projects }) => {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105"
                   >
                     <ExternalLink className="w-4 h-4" />
                     Live Demo
@@ -85,7 +85,7 @@ const Projects = ({ projects }) => {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 border-2 border-border text-foreground rounded-lg hover:bg-muted transition-all duration-300"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-slate-900 to-indigo-900 border border-border text-white rounded-lg hover:bg-muted transition-all duration-300"
                   >
                     <Github className="w-4 h-4" />
                     Code
@@ -114,7 +114,7 @@ const Projects = ({ projects }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-card border border-border rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="bg-card border-2 border-border rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                 >
                   <h4 className="text-xl font-bold mb-3">{project.title}</h4>
                   
@@ -143,7 +143,7 @@ const Projects = ({ projects }) => {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 text-center px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-300 text-sm"
+                      className="flex-1 text-center px-3 py-2 bg-[#1ED40D] text-black rounded-lg hover:opacity-90 transition-colors duration-300 text-sm"
                     >
                       Demo
                     </a>
@@ -151,7 +151,7 @@ const Projects = ({ projects }) => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 text-center px-3 py-2 border border-border text-foreground rounded-lg hover:bg-muted transition-colors duration-300 text-sm"
+                      className="flex-1 text-center px-3 py-2 border border-border bg-gradient-to-br from-slate-900 to-indigo-900 text-white rounded-lg hover:bg-muted transition-colors duration-300 text-sm"
                     >
                       Code
                     </a>

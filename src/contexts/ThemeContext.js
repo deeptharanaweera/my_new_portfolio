@@ -102,7 +102,7 @@ export const ThemeProvider = ({ children }) => {
     return (base, mode) => {
       const background = base?.background || (mode === 'dark' ? '#0a0a0a' : '#ffffff');
       const foreground = mode === 'dark' ? '#e5e7eb' : '#111827';
-      const primary = mode === 'dark' ? '#60a5fa' : '#3b82f6';
+      const primary = mode === 'dark' ? '#006FF7' : '#3b82f6';
       const primaryForeground = bestForeground(primary);
       const card = mix(background, foreground, mode === 'dark' ? 0.06 : 0.02);
       const cardForeground = foreground;
