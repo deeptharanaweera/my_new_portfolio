@@ -9,6 +9,15 @@ const Hero = ({ personalInfo, socialLinks }) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const isValidUrl = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
   const getSocialIcon = (platform) => {
     const iconProps = { className: "w-5 h-5" };
     switch (platform.toLowerCase()) {
@@ -43,7 +52,7 @@ const Hero = ({ personalInfo, socialLinks }) => {
         >
           <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-8 rounded-full bg-primary p-1">
             <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
-              {personalInfo.avatar ? (
+              {personalInfo.avatar && isValidUrl(personalInfo.avatar) ? (
                 <Image 
                   src={personalInfo.avatar} 
                   alt={personalInfo.name}

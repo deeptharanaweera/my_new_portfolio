@@ -8,6 +8,15 @@ const PersonalInfoForm = ({ data, socialLinks, onUpdate }) => {
   const [personalInfo, setPersonalInfo] = useState(data || {});
   const [socials, setSocials] = useState(socialLinks || {});
 
+  const isValidUrl = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
   const handlePersonalInfoChange = (field, value) => {
     const updated = { ...personalInfo, [field]: value };
     setPersonalInfo(updated);
@@ -58,7 +67,7 @@ const PersonalInfoForm = ({ data, socialLinks, onUpdate }) => {
           </label>
           <div className="flex items-center gap-6">
             <div className="w-24 h-24 rounded-full overflow-hidden bg-muted flex items-center justify-center">
-              {personalInfo.avatar ? (
+              {personalInfo.avatar && isValidUrl(personalInfo.avatar) ? (
                 <Image 
                   src={personalInfo.avatar} 
                   alt="Profile" 
