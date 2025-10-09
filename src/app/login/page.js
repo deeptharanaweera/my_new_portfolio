@@ -30,7 +30,7 @@ export default function LoginPage() {
         <div className="absolute inset-0 bg-black/40"></div>
         
         <div className="w-full max-w-md bg-card/95 backdrop-blur-sm border border-border rounded-2xl shadow-xl p-8 text-center relative z-10">
-          <h1 className="text-2xl font-bold mb-2">You're already signed in</h1>
+          <h1 className="text-2xl font-bold mb-2">You&apos;re already signed in</h1>
           <p className="text-sm text-muted-foreground mb-6">Go to the admin dashboard or sign out to switch accounts.</p>
           <div className="flex gap-3">
             <button

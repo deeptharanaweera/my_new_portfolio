@@ -116,7 +116,7 @@ const About = ({ personalInfo, experience, education }) => {
               <h3 className="text-2xl font-bold ">My Story</h3>
               <hr className='w-20.5 mb-4 text-4xl'/>
               <p className="text-muted-foreground leading-relaxed">
-                I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. 
+                I&apos;m a passionate developer who loves creating innovative solutions and bringing ideas to life through code. 
                 With a strong foundation in modern web technologies, I enjoy tackling complex challenges and building 
                 user-friendly applications that make a difference.
               </p>

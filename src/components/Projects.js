@@ -21,7 +21,7 @@ const Projects = ({ projects }) => {
             Featured Projects
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Some of my recent work that I'm proud to showcase
+            Some of my recent work that I&apos;m proud to showcase
           </p>
         </motion.div>
 
