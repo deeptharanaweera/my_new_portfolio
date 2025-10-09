@@ -1,13 +1,44 @@
 @import "tailwindcss";
 
+/* CSS Variables base palette */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111827;
+  --primary: #0061fc;
+  --primaryForeground: #ffffff;
+  --secondary: #6b7280;
+  --secondaryForeground: #ffffff;
+  --accent: #10b981;
+  --accentForeground: #06281f;
+  --muted: #f3f4f6;
+  --mutedForeground: #374151;
+  --card: #ffffff;
+  --cardForeground: #111827;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #93c5fd;
 }
 
+/* Tailwind theme token mapping for CSS variables */
 @theme inline {
+  /* core tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--cardForeground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--mutedForeground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primaryForeground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondaryForeground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accentForeground);
+
+  /* fonts (optional) */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -15,7 +46,20 @@
 /* Dark mode variables */
 .dark {
   --background: #0a0a0a;
-  --foreground: #ededed;
+  --foreground: #e5e7eb;
+  --primary: #60a5fa;
+  --primaryForeground: #0b1220;
+  --secondary: #9ca3af;
+  --secondaryForeground: #0b0f19;
+  --accent: #34d399;
+  --accentForeground: #06281f;
+  --muted: #111827;
+  --mutedForeground: #9ca3af;
+  --card: #0b0f19;
+  --cardForeground: #e5e7eb;
+  --border: #1f2937;
+  --input: #374151;
+  --ring: #2563eb;
 }
 
 body {

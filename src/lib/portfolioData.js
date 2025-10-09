@@ -3,6 +3,42 @@ import { db } from './firebase';
 
 // Default portfolio data structure
 export const defaultPortfolioData = {
+  theme: {
+    light: {
+      background: '#ffffff',
+      foreground: '#111827',
+      primary: '#3b82f6',
+      primaryForeground: '#ffffff',
+      secondary: '#6b7280',
+      secondaryForeground: '#ffffff',
+      accent: '#10b981',
+      accentForeground: '#06281f',
+      muted: '#f3f4f6',
+      mutedForeground: '#374151',
+      card: '#ffffff',
+      cardForeground: '#111827',
+      border: '#e5e7eb',
+      input: '#e5e7eb',
+      ring: '#93c5fd'
+    },
+    dark: {
+      background: '#0a0a0a',
+      foreground: '#e5e7eb',
+      primary: '#60a5fa',
+      primaryForeground: '#0b1220',
+      secondary: '#9ca3af',
+      secondaryForeground: '#0b0f19',
+      accent: '#34d399',
+      accentForeground: '#06281f',
+      muted: '#111827',
+      mutedForeground: '#9ca3af',
+      card: '#0b0f19',
+      cardForeground: '#e5e7eb',
+      border: '#1f2937',
+      input: '#374151',
+      ring: '#2563eb'
+    }
+  },
   personalInfo: {
     name: 'Your Name',
     title: 'Full Stack Developer',
@@ -67,7 +103,59 @@ export const defaultPortfolioData = {
       duration: '2018 - 2022',
       location: 'City, Country'
     }
-  ]
+  ],
+  services: [
+    {
+      id: '1',
+      title: 'Web Development',
+      description: 'Custom web applications built with modern technologies like React, Next.js, and Node.js.',
+      icon: 'code',
+      features: [
+        'Responsive Design',
+        'SEO Optimization',
+        'Performance Optimization',
+        'Cross-browser Compatibility'
+      ],
+      price: '$500+',
+      priceNote: 'Starting from'
+    },
+    {
+      id: '2',
+      title: 'UI/UX Design',
+      description: 'Beautiful and intuitive user interfaces that provide exceptional user experiences.',
+      icon: 'palette',
+      features: [
+        'User Research',
+        'Wireframing',
+        'Prototyping',
+        'Design Systems'
+      ],
+      price: '$300+',
+      priceNote: 'Starting from'
+    },
+    {
+      id: '3',
+      title: 'Mobile Development',
+      description: 'Native and cross-platform mobile applications for iOS and Android.',
+      icon: 'smartphone',
+      features: [
+        'React Native',
+        'Flutter',
+        'Native iOS/Android',
+        'App Store Deployment'
+      ],
+      price: '$800+',
+      priceNote: 'Starting from'
+    }
+  ],
+  visibility: {
+    hero: true,
+    about: true,
+    services: true,
+    skills: true,
+    projects: true,
+    contact: true
+  }
 };
 
 // Firebase operations
@@ -137,3 +225,15 @@ export const updateProjects = async (projects) => {
     return false;
   }
 };
+
+export const updateServices = async (services) => {
+  try {
+    const docRef = doc(db, 'portfolio', 'data');
+    await updateDoc(docRef, { services });
+    return true;
+  } catch (error) {
+    console.error('Error updating services:', error);
+    return false;
+  }
+};
+

@@ -3,6 +3,7 @@
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Hero from '@/components/Hero';
+import MyServices from '@/components/MyServices';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -30,10 +31,10 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading portfolio...</p>
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading portfolio...</p>
         </div>
       </div>
     );
@@ -41,37 +42,51 @@ export default function Home() {
 
   if (!portfolioData) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 dark:text-red-400">Failed to load portfolio data</p>
+          <p className="text-red-600">Failed to load portfolio data</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-background text-foreground">
       <ThemeToggle />
       
-      <Hero 
-        personalInfo={portfolioData.personalInfo} 
-        socialLinks={portfolioData.socialLinks} 
-      />
+      {portfolioData.visibility?.hero && (
+        <Hero 
+          personalInfo={portfolioData.personalInfo} 
+          socialLinks={portfolioData.socialLinks} 
+        />
+      )}
       
-      <About 
-        personalInfo={portfolioData.personalInfo}
-        experience={portfolioData.experience}
-        education={portfolioData.education}
-      />
+      {portfolioData.visibility?.about && (
+        <About 
+          personalInfo={portfolioData.personalInfo}
+          experience={portfolioData.experience}
+          education={portfolioData.education}
+        />
+      )}
       
-      <Skills skills={portfolioData.skills} />
+      {portfolioData.visibility?.services && (
+        <MyServices services={portfolioData.services} />
+      )}
       
-      <Projects projects={portfolioData.projects} />
+      {portfolioData.visibility?.skills && (
+        <Skills skills={portfolioData.skills} />
+      )}
       
-      <Contact 
-        personalInfo={portfolioData.personalInfo}
-        socialLinks={portfolioData.socialLinks}
-      />
+      {portfolioData.visibility?.projects && (
+        <Projects projects={portfolioData.projects} />
+      )}
+      
+      {portfolioData.visibility?.contact && (
+        <Contact 
+          personalInfo={portfolioData.personalInfo}
+          socialLinks={portfolioData.socialLinks}
+        />
+      )}
     </div>
   );
 }

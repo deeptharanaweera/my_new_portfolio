@@ -1,5 +1,7 @@
 'use client';
 
+import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { getPortfolioData, updatePortfolioData } from '@/lib/portfolioData';
 import { motion } from 'framer-motion';
 import {
@@ -7,7 +9,11 @@ import {
   Code,
   Eye,
   GraduationCap,
+  Layout,
+  LogOut,
+  Palette,
   Save,
+  Settings,
   User
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -16,9 +22,14 @@ import EducationForm from './EducationForm';
 import ExperienceForm from './ExperienceForm';
 import PersonalInfoForm from './PersonalInfoForm';
 import ProjectsForm from './ProjectsForm';
+import ServicesForm from './ServicesForm';
 import SkillsForm from './SkillsForm';
+import ThemeSettingsForm from './ThemeSettingsForm';
+import VisibilityForm from './VisibilityForm';
 
 const AdminDashboard = () => {
+  const { setThemeColors } = useTheme();
+  const { signOut } = useAuth();
   const [activeTab, setActiveTab] = useState('personal');
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -70,12 +81,22 @@ const AdminDashboard = () => {
     }));
   };
 
+  // Apply theme colors instantly when they change in admin
+  useEffect(() => {
+    if (portfolioData?.theme) {
+      setThemeColors(portfolioData.theme);
+    }
+  }, [portfolioData?.theme, setThemeColors]);
+
   const tabs = [
     { id: 'personal', label: 'Personal Info', icon: User },
+    { id: 'services', label: 'Services', icon: Settings },
     { id: 'skills', label: 'Skills', icon: Code },
     { id: 'projects', label: 'Projects', icon: Briefcase },
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'education', label: 'Education', icon: GraduationCap },
+    { id: 'visibility', label: 'Page Visibility', icon: Layout },
+    { id: 'theme', label: 'Theme', icon: Palette },
   ];
 
   if (loading) {
@@ -100,18 +121,18 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background text-foreground">
       <ThemeToggle />
       
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-card shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Portfolio Admin</h1>
+              <h1 className="text-2xl font-bold">Portfolio Admin</h1>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">Connected</span>
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <span className="text-sm text-muted-foreground">Connected</span>
               </div>
             </div>
             
@@ -120,7 +141,7 @@ const AdminDashboard = () => {
                 href="/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors duration-300"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-900 to-slate-700 text-white hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-ring rounded-lg border border-white/20 hover:border-white/40"
               >
                 <Eye className="w-4 h-4" />
                 View Portfolio
@@ -129,10 +150,18 @@ const AdminDashboard = () => {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-900 text-white rounded-lg hover:opacity-90 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-ring border border-white/20 hover:border-white/40"
               >
                 <Save className="w-4 h-4" />
                 {saving ? 'Saving...' : 'Save Changes'}
+              </button>
+
+              <button
+                onClick={signOut}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-ring border border-white/20 hover:border-white/40"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
               </button>
             </div>
           </div>
@@ -143,8 +172,8 @@ const AdminDashboard = () => {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Navigation</h2>
+            <div className="bg-card rounded-xl shadow-lg p-6 border border-border">
+              <h2 className="text-lg font-semibold mb-4">Navigation</h2>
               
               <nav className="space-y-2">
                 {tabs.map((tab) => {
@@ -153,10 +182,10 @@ const AdminDashboard = () => {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors duration-300 ${
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors duration-300 border border-transparent focus:outline-none focus:ring-2 focus:ring-ring ${
                         activeTab === tab.id
-                          ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          ? 'bg-primary text-primary-foreground border-primary'
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground hover:border-border'
                       }`}
                     >
                       <IconComponent className="w-5 h-5" />
@@ -175,7 +204,7 @@ const AdminDashboard = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"
+              className="bg-card rounded-xl shadow-lg p-8 border border-border"
             >
               {activeTab === 'personal' && (
                 <PersonalInfoForm
@@ -185,6 +214,13 @@ const AdminDashboard = () => {
                     updateData('personalInfo', personalInfo);
                     updateData('socialLinks', socialLinks);
                   }}
+                />
+              )}
+              
+              {activeTab === 'services' && (
+                <ServicesForm
+                  data={portfolioData.services}
+                  onUpdate={(services) => updateData('services', services)}
                 />
               )}
               
@@ -213,6 +249,20 @@ const AdminDashboard = () => {
                 <EducationForm
                   data={portfolioData.education}
                   onUpdate={(education) => updateData('education', education)}
+                />
+              )}
+              
+              {activeTab === 'visibility' && (
+                <VisibilityForm
+                  data={portfolioData.visibility}
+                  onUpdate={(visibility) => updateData('visibility', visibility)}
+                />
+              )}
+
+              {activeTab === 'theme' && (
+                <ThemeSettingsForm
+                  data={portfolioData.theme}
+                  onUpdate={(theme) => updateData('theme', theme)}
                 />
               )}
             </motion.div>

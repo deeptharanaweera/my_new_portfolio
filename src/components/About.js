@@ -5,7 +5,7 @@ import { Calendar, Mail, MapPin, Phone } from 'lucide-react';
 
 const About = ({ personalInfo, experience, education }) => {
   return (
-    <section id="about" className="py-20 bg-white dark:bg-gray-800">
+    <section id="about" className="py-20 bg-background text-foreground">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -14,10 +14,10 @@ const About = ({ personalInfo, experience, education }) => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             About Me
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Get to know more about my background, experience, and passion for technology
           </p>
         </motion.div>
@@ -29,32 +29,32 @@ const About = ({ personalInfo, experience, education }) => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 "
           >
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Personal Information</h3>
+            <div className="bg-card border-2 border-border p-8 rounded-2xl">
+              <h3 className="text-2xl font-bold mb-6">Personal Information</h3>
               
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-blue-600" />
-                  <span className="text-gray-600 dark:text-gray-300">{personalInfo.email}</span>
+                  <Mail className="w-5 h-5 text-orange-600" />
+                  <span className="text-muted-foreground">{personalInfo.email}</span>
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-blue-600" />
-                  <span className="text-gray-600 dark:text-gray-300">{personalInfo.phone}</span>
+                  <Phone className="w-5 h-5 text-blue-500" />
+                  <span className="text-muted-foreground">{personalInfo.phone}</span>
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 text-blue-600" />
-                  <span className="text-gray-600 dark:text-gray-300">{personalInfo.location}</span>
+                  <MapPin className="w-5 h-5 text-green-500" />
+                  <span className="text-muted-foreground">{personalInfo.location}</span>
                 </div>
               </div>
             </div>
 
             {/* Experience */}
-            <div className="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Experience</h3>
+            <div className="bg-card border-2 border-border p-8 rounded-2xl shadow-lg">
+              <h3 className="text-2xl font-bold mb-6">Experience</h3>
               
               <div className="space-y-6">
                 {experience.map((exp, index) => (
@@ -64,15 +64,15 @@ const About = ({ personalInfo, experience, education }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="border-l-4 border-blue-500 pl-6"
+                    className="border-l-4 border-[#083fe3] pl-6"
                   >
-                    <h4 className="text-xl font-semibold text-gray-800 dark:text-white">{exp.position}</h4>
-                    <p className="text-blue-600 font-medium">{exp.company}</p>
-                    <p className="text-gray-500 text-sm flex items-center gap-2 mt-1">
+                    <h4 className="text-xl font-semibold">{exp.position}</h4>
+                    <p className="text-primary font-medium">{exp.company}</p>
+                    <p className="text-muted-foreground text-sm flex items-center gap-2 mt-1">
                       <Calendar className="w-4 h-4" />
                       {exp.duration}
                     </p>
-                    <p className="text-gray-600 dark:text-gray-300 mt-2">{exp.description}</p>
+                    <p className="text-muted-foreground mt-2">{exp.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -87,8 +87,8 @@ const About = ({ personalInfo, experience, education }) => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Education</h3>
+            <div className="bg-card border-2 border-border p-8 rounded-2xl shadow-lg">
+              <h3 className="text-2xl font-bold mb-6">Education</h3>
               
               <div className="space-y-6">
                 {education.map((edu, index) => (
@@ -98,23 +98,24 @@ const About = ({ personalInfo, experience, education }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="border-l-4 border-purple-500 pl-6"
+                    className="border-l-4 border-[#0dff05] pl-6"
                   >
-                    <h4 className="text-xl font-semibold text-gray-800 dark:text-white">{edu.degree}</h4>
-                    <p className="text-purple-600 font-medium">{edu.institution}</p>
-                    <p className="text-gray-500 text-sm flex items-center gap-2 mt-1">
+                    <h4 className="text-xl font-semibold">{edu.degree}</h4>
+                    <p className="text-primary font-medium">{edu.institution}</p>
+                    <p className="text-muted-foreground text-sm flex items-center gap-2 mt-1">
                       <Calendar className="w-4 h-4" />
                       {edu.duration}
                     </p>
-                    <p className="text-gray-500 text-sm mt-1">{edu.location}</p>
+                    <p className="text-muted-foreground text-sm mt-1">{edu.location}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-600 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">My Story</h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+            <div className="bg-card border-2 border-border p-8 rounded-2xl">
+              <h3 className="text-2xl font-bold ">My Story</h3>
+              <hr className='w-20.5 mb-4 text-4xl'/>
+              <p className="text-muted-foreground leading-relaxed">
                 I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. 
                 With a strong foundation in modern web technologies, I enjoy tackling complex challenges and building 
                 user-friendly applications that make a difference.

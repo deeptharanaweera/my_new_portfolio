@@ -8,6 +8,23 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        primary: 'var(--primary)',
+        'primary-foreground': 'var(--primaryForeground)',
+        secondary: 'var(--secondary)',
+        'secondary-foreground': 'var(--secondaryForeground)',
+        accent: 'var(--accent)',
+        'accent-foreground': 'var(--accentForeground)',
+        muted: 'var(--muted)',
+        'muted-foreground': 'var(--mutedForeground)',
+        card: 'var(--card)',
+        'card-foreground': 'var(--cardForeground)',
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)'
+      },
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'monospace'],
