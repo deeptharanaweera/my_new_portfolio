@@ -14,8 +14,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Portfolio - Your Name",
-  description: "Modern portfolio website showcasing skills, projects, and experience",
+  title: "Portfolio - Deeptha Ranaweera",
+  description: "Portfolio website showcasing skills, projects, and experience",
+  icons: {
+    icon: '../../public/icon.png',
+    shortcut: '../../public/icon.png',
+    apple: '../../public/icon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
