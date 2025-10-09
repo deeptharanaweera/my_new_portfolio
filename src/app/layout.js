@@ -14,18 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-<<<<<<< Updated upstream
-  title: "Portfolio - Your Name",
-  description: "Modern portfolio website showcasing skills, projects, and experience",
-=======
+
   title: "Portfolio - Deeptha Ranaweera",
   description: "Portfolio website showcasing skills, projects, and experience",
   icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
-    apple: '/icon.png',
+    icon: '../../public/icon.png',
+    shortcut: '../../public/icon.png',
+    apple: '../../public/icon.png',
   },
->>>>>>> Stashed changes
 };
 
 export default function RootLayout({ children }) {
