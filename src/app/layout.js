@@ -18,9 +18,9 @@ export const metadata = {
   title: "Portfolio - Deeptha Ranaweera",
   description: "Portfolio website showcasing skills, projects, and experience",
   icons: {
-    icon: '../../public/icon.png',
-    shortcut: '../../public/icon.png',
-    apple: '../../public/icon.png',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
 };
 
