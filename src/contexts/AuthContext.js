@@ -2,9 +2,10 @@
 
 import { auth } from '@/lib/firebase';
 import {
-    signOut as firebaseSignOut,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut as firebaseSignOut,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
@@ -32,11 +33,15 @@ export const AuthProvider = ({ children }) => {
     await signInWithEmailAndPassword(auth, email, password);
   };
 
+  const signUp = async (email, password) => {
+    await createUserWithEmailAndPassword(auth, email, password);
+  };
+
   const signOut = async () => {
     await firebaseSignOut(auth);
   };
 
-  const value = useMemo(() => ({ user, initializing, signIn, signOut }), [user, initializing]);
+  const value = useMemo(() => ({ user, initializing, signIn, signUp, signOut }), [user, initializing]);
 
   return (
     <AuthContext.Provider value={value}>

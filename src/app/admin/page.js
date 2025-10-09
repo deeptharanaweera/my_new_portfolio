@@ -2,6 +2,7 @@
 
 import AdminDashboard from '@/components/admin/AdminDashboard';
 import { useAuth } from '@/contexts/AuthContext';
+import Footer from '@/components/admin/Footer';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -28,5 +29,10 @@ export default function AdminPage() {
 
   if (!user) return null;
 
-  return <AdminDashboard />;
+  return (
+    <>
+      <AdminDashboard />
+      <Footer />
+    </>
+  );
 }

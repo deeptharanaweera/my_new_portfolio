@@ -43,6 +43,20 @@ const VisibilityForm = ({ data, onUpdate }) => {
         </div>
       </div>
 
+      <div className="mt-8 p-4 bg-primary/10 rounded-lg border border-primary/30">
+        <div className="flex items-start gap-3">
+          <Settings className="w-5 h-5 text-primary mt-0.5" />
+          <div>
+            <h4 className="text-sm font-semibold text-foreground mb-1">
+              Visibility Settings
+            </h4>
+            <p className="text-sm text-muted-foreground">
+              Toggle sections on/off to customize your portfolio layout. Hidden sections will not appear on your public portfolio page.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="grid gap-4">
         {sections.map((section) => (
           <div
@@ -89,19 +103,7 @@ const VisibilityForm = ({ data, onUpdate }) => {
         ))}
       </div>
 
-      <div className="mt-8 p-4 bg-primary/10 rounded-lg border border-primary/30">
-        <div className="flex items-start gap-3">
-          <Settings className="w-5 h-5 text-primary mt-0.5" />
-          <div>
-            <h4 className="text-sm font-semibold text-foreground mb-1">
-              Visibility Settings
-            </h4>
-            <p className="text-sm text-muted-foreground">
-              Toggle sections on/off to customize your portfolio layout. Hidden sections will not appear on your public portfolio page.
-            </p>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

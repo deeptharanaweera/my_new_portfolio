@@ -1,5 +1,6 @@
 'use client';
 
+import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getPortfolioData, updatePortfolioData } from '@/lib/portfolioData';
 import { motion } from 'framer-motion';
@@ -9,6 +10,7 @@ import {
   Eye,
   GraduationCap,
   Layout,
+  LogOut,
   Palette,
   Save,
   Settings,
@@ -27,6 +29,7 @@ import VisibilityForm from './VisibilityForm';
 
 const AdminDashboard = () => {
   const { setThemeColors } = useTheme();
+  const { signOut } = useAuth();
   const [activeTab, setActiveTab] = useState('personal');
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -151,6 +154,14 @@ const AdminDashboard = () => {
               >
                 <Save className="w-4 h-4" />
                 {saving ? 'Saving...' : 'Save Changes'}
+              </button>
+
+              <button
+                onClick={signOut}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-ring border border-white/20 hover:border-white/40"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
               </button>
             </div>
           </div>
