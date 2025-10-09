@@ -2,10 +2,20 @@
 
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Star } from 'lucide-react';
+import Image from 'next/image';
 
 const Projects = ({ projects }) => {
   const featuredProjects = projects.filter(project => project.featured);
   const otherProjects = projects.filter(project => !project.featured);
+
+  const isValidUrl = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
 
   return (
     <section id="projects" className="py-20 bg-background text-foreground">
@@ -37,6 +47,14 @@ const Projects = ({ projects }) => {
               className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-border"
             >
               <div className="relative h-64 bg-primary overflow-hidden">
+                {project.image && isValidUrl(project.image) ? (
+                  <Image 
+                    src={project.image} 
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                  />
+                ) : null}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
                 <div className="absolute top-4 right-4">
                   <Star className="w-6 h-6 text-yellow-400 fill-current" />
