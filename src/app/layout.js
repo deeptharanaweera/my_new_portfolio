@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
 
-  title: "Portfolio - Deeptha Ranaweera",
+  title: "Portfolio",
   description: "Portfolio website showcasing skills, projects, and experience",
   icons: {
     icon: '/icon.png',
