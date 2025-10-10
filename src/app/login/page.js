@@ -158,7 +158,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        {/* <div className="mt-6 text-center">
           <button
             type="button"
             onClick={() => {
@@ -172,7 +172,7 @@ export default function LoginPage() {
           >
             {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
