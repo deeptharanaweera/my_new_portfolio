@@ -6,7 +6,6 @@ import Hero from '@/components/Hero';
 import MyServices from '@/components/MyServices';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
-import ThemeToggle from '@/components/ThemeToggle';
 import { getPortfolioData } from '@/lib/portfolioData';
 import { useEffect, useState } from 'react';
 
@@ -51,9 +50,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <ThemeToggle />
-      
+    <div className="bg-background text-foreground">
       {portfolioData.visibility?.hero && (
         <Hero 
           personalInfo={portfolioData.personalInfo} 

@@ -1,22 +1,11 @@
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { Geist, Geist_Mono } from "next/font/google";
+import PortfolioLayout from "@/components/PortfolioLayout";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
-
-  title: "Portfolio",
-  description: "Portfolio website showcasing skills, projects, and experience",
+  title: "Modern Portfolio & Case Studies",
+  description: "Modern portfolio website showcasing full stack engineering, AI integrations, projects, and case studies",
   icons: {
     icon: '/icon.png',
     shortcut: '/icon.png',
@@ -27,12 +16,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="font-sans antialiased">
         <ThemeProvider>
           <AuthProvider>
-            {children}
+            <PortfolioLayout>
+              {children}
+            </PortfolioLayout>
           </AuthProvider>
         </ThemeProvider>
       </body>
