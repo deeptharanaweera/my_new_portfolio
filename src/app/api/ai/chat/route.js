@@ -11,9 +11,12 @@ export async function POST(request) {
     const apiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
     // Grounding context from the portfolio
-    const developerName = portfolioData?.personalInfo?.name || 'The Developer';
+    const developerName = portfolioData?.personalInfo?.name || 'Deeptha Ranaweera';
     const title = portfolioData?.personalInfo?.title || 'Full Stack Developer';
+    const bio = portfolioData?.personalInfo?.bio || 'Passionate software engineer experienced in building scalable modern web, mobile, and AI solutions.';
     const email = portfolioData?.personalInfo?.email || 'N/A';
+    const rawPhone = portfolioData?.personalInfo?.phone || '';
+    const cleanPhone = rawPhone.replace(/[^0-9]/g, '');
     const location = portfolioData?.personalInfo?.location || 'N/A';
     const skillsList = portfolioData?.skills?.map((s) => `${s.name} (${s.category}, ${s.level}%)`).join(', ') || 'Modern Full Stack Technologies';
     const projectsList = portfolioData?.projects?.map((p) => {
@@ -31,8 +34,12 @@ export async function POST(request) {
 Your mission is to represent ${developerName} professionally, enthusiastically, and helpfully to recruiters, clients, and visitors.
 Answer their questions accurately based on the portfolio data below:
 
+Name: ${developerName}
+Title: ${title}
+Bio: ${bio}
 Location: ${location}
 Email: ${email}
+Phone / WhatsApp: ${rawPhone}
 Skills: ${skillsList}
 Projects:
 ${projectsList}
@@ -43,9 +50,10 @@ ${experienceList}
 Guidelines:
 1. Be concise, polite, and articulate.
 2. Format answers with clean markdown (bullet points, bold text).
-3. If asked about hiring or contacting, provide the email (${email}) and encourage reaching out.
-4. If asked about a specific technology, reference any projects, experience, or skills matching it.
-5. If asked about work history, career, or past companies, highlight roles, achievements, and impact.`;
+3. If asked "who is ${developerName}", "who are you", or about their background, give an impressive introduction highlighting their role, top skills, current company/experience, and invite them to connect or view projects.
+4. If asked about hiring or contacting, provide the email (${email}) and WhatsApp link (https://wa.me/${cleanPhone}) and encourage reaching out.
+5. If asked about a specific technology, reference any projects, experience, or skills matching it.
+6. If asked about work history, career, or past companies, highlight roles, achievements, and impact.`;
 
     if (apiKey) {
       try {
@@ -85,7 +93,61 @@ Guidelines:
     const lower = message.toLowerCase();
     let reply = '';
 
-    if (lower.includes('experience') || lower.includes('career') || lower.includes('company') || lower.includes('companies') || lower.includes('job') || lower.includes('employment') || lower.includes('history') || (lower.includes('work') && !lower.includes('project'))) {
+    const nameLower = developerName.toLowerCase();
+    const isAskingAboutPerson =
+      lower.includes('who is') ||
+      lower.includes('who are') ||
+      lower.includes('tell me about') ||
+      lower.includes('about ' + nameLower) ||
+      lower.includes('about you') ||
+      lower.includes('about him') ||
+      lower.includes('about the developer') ||
+      lower.includes('introduce') ||
+      lower.includes('bio') ||
+      lower.includes('profile') ||
+      lower.includes('deeptha') ||
+      lower.includes('ranaweera');
+
+    if (isAskingAboutPerson && !lower.includes('project') && !lower.includes('skill')) {
+      const latestRole = portfolioData?.experience?.[0];
+      const topProjects = portfolioData?.projects?.slice(0, 2) || [];
+      const topSkills = portfolioData?.skills?.slice(0, 6)?.map((s) => s.name)?.join(', ') || 'Next.js, React, Node.js, Laravel, MySQL, Tailwind CSS';
+
+      reply = `**${developerName}** is an innovative **${title}** based in **${location}**. 🚀\n\n` +
+        `### 👨‍💻 Professional Profile\n` +
+        `${bio}\n\n` +
+        (latestRole
+          ? `• **Current Position:** ${latestRole.position} at **${latestRole.company}** (${latestRole.duration})\n`
+          : '') +
+        `• **Core Technologies:** ${topSkills}\n` +
+        (topProjects.length > 0
+          ? `• **Featured Projects:** ${topProjects.map((p) => `*${p.title}*`).join(', ')}\n`
+          : '') +
+        `\n### 💬 Direct Connect\n` +
+        `Would you like to connect directly or discuss an upcoming project?\n` +
+        (cleanPhone
+          ? `• **WhatsApp:** [Chat Directly with ${developerName} on WhatsApp](https://wa.me/${cleanPhone}?text=Hi%20${encodeURIComponent(developerName)},%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!)\n`
+          : '') +
+        `• **Email:** [${email}](mailto:${email})\n\n` +
+        `You can ask me more about specific projects, technical experience, or click the WhatsApp link above to send an instant message!`;
+    } else if (
+      lower.includes('whatsapp') ||
+      lower.includes('direct connect') ||
+      lower.includes('connect with me') ||
+      lower.includes('connect directly') ||
+      lower.includes('chat directly') ||
+      lower.includes('chat with') ||
+      lower.includes('phone') ||
+      lower.includes('call')
+    ) {
+      reply = `You can connect directly with **${developerName}** on WhatsApp! 📱\n\n` +
+        (cleanPhone
+          ? `👉 **[Click Here to Open WhatsApp Chat](https://wa.me/${cleanPhone}?text=Hi%20${encodeURIComponent(developerName)},%20I'm%20visiting%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you!)**\n\n`
+          : (rawPhone ? `• **Phone:** ${rawPhone}\n\n` : '')) +
+        `• **Direct Email:** [${email}](mailto:${email})\n` +
+        `• **Location:** ${location}\n\n` +
+        `Clicking the link will open WhatsApp so you can start a conversation right away!`;
+    } else if (lower.includes('experience') || lower.includes('career') || lower.includes('company') || lower.includes('companies') || lower.includes('job') || lower.includes('employment') || lower.includes('history') || (lower.includes('work') && !lower.includes('project'))) {
       const experiences = portfolioData?.experience || [];
       if (experiences.length > 0) {
         reply = `Here is **${developerName}'s** professional work experience:\n\n` +

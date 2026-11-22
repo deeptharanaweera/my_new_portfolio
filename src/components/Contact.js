@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Instagram, Linkedin, Mail, MapPin, Phone, Send, Twitter } from 'lucide-react';
+import { Github, Instagram, Linkedin, Mail, MapPin, Phone, Send, Twitter, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 
-const Contact = ({ personalInfo, socialLinks }) => {
+const Contact = ({ personalInfo = {}, socialLinks = {} }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,6 +13,8 @@ const Contact = ({ personalInfo, socialLinks }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+
+  const cleanPhone = (personalInfo.phone || '').replace(/[^0-9]/g, '');
 
   const handleInputChange = (e) => {
     setFormData({
@@ -24,17 +26,33 @@ const Contact = ({ personalInfo, socialLinks }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
+
+    try {
+      // Send WhatsApp lead notification
+      await fetch('/api/notify/whatsapp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          phone: '',
+          developerPhone: cleanPhone
+        })
+      });
+    } catch (err) {
+      console.warn('WhatsApp notify attempt:', err);
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
+
       setTimeout(() => {
         setSubmitStatus(null);
-      }, 3000);
-    }, 1000);
+      }, 4000);
+    }, 800);
   };
 
   const socialIcons = {
@@ -104,6 +122,29 @@ const Contact = ({ personalInfo, socialLinks }) => {
                     <p className="font-medium">{personalInfo.location}</p>
                   </div>
                 </div>
+
+                {cleanPhone && (
+                  <a
+                    href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(
+                      `Hi ${personalInfo.name || 'Deeptha'}, I saw your portfolio and would like to connect with you!`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-green-500/10 border border-green-500/30 hover:bg-green-500/20 transition-all group"
+                  >
+                    <div className="p-3 bg-green-600 rounded-xl text-white shadow-md shadow-green-600/30 group-hover:scale-105 transition-transform">
+                      <MessageCircle className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-green-600 dark:text-green-400 text-xs font-bold uppercase tracking-wider">
+                        Direct WhatsApp Chat
+                      </p>
+                      <p className="font-bold text-foreground text-sm group-hover:text-green-600 transition-colors">
+                        Click to Message on WhatsApp &rarr;
+                      </p>
+                    </div>
+                  </a>
+                )}
               </div>
             </div>
 
