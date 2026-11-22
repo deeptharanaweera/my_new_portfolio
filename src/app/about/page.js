@@ -15,13 +15,50 @@ import {
   ArrowRight,
   Code2,
   CheckCircle2,
-  Compass
+  Compass,
+  TrendingUp,
+  Building2,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import { getPortfolioData } from '@/lib/portfolioData';
+
+// Sanitize unprintable or corrupted characters (e.g. Unicode replacement boxes)
+const sanitizeText = (str) => {
+  if (!str || typeof str !== 'string') return '';
+  return str
+    .replace(/\uFFFD/g, '')
+    .replace(/[^\x20-\x7E\u00A0-\u024F\u2010-\u2027]/g, '')
+    .trim();
+};
+
+// Split achievement string into a bold title and descriptive body if formatted with a colon
+const parseAchievement = (text) => {
+  const sanitized = sanitizeText(text);
+  const colonIndex = sanitized.indexOf(':');
+  if (colonIndex > 0 && colonIndex < 45) {
+    return {
+      title: sanitized.slice(0, colonIndex).trim(),
+      detail: sanitized.slice(colonIndex + 1).trim()
+    };
+  }
+  return {
+    title: '',
+    detail: sanitized
+  };
+};
 
 export default function AboutPage() {
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [expandedRoles, setExpandedRoles] = useState({});
+
+  const toggleRoleAchievements = (roleId) => {
+    setExpandedRoles((prev) => ({
+      ...prev,
+      [roleId]: !prev[roleId]
+    }));
+  };
 
   useEffect(() => {
     async function loadData() {
@@ -202,25 +239,136 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-6">
-              {experience.map((exp, index) => (
-                <div
-                  key={exp.id || index}
-                  className="p-6 rounded-2xl bg-card border border-border space-y-3 shadow-xs hover:border-primary/40 transition-colors relative"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div>
-                      <h3 className="text-xl font-bold text-foreground">{exp.position}</h3>
-                      <p className="text-primary font-semibold text-sm">{exp.company}</p>
-                    </div>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted text-muted-foreground text-xs font-medium w-fit">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {exp.duration}
-                    </span>
-                  </div>
+              {experience.map((exp, index) => {
+                const roleId = exp.id || index;
+                const achievements = exp.achievements || [];
+                const isExpanded = expandedRoles[roleId];
+                const displayedAchievements = isExpanded ? achievements : achievements.slice(0, 2);
 
-                  <p className="text-muted-foreground text-sm leading-relaxed">{exp.description}</p>
-                </div>
-              ))}
+                return (
+                  <div
+                    key={roleId}
+                    className="p-6 sm:p-8 rounded-3xl bg-card border border-border space-y-5 shadow-xs hover:border-primary/40 transition-colors relative"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                          {sanitizeText(exp.position)}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-3 mt-1 text-sm">
+                          <p className="text-primary font-semibold flex items-center gap-1.5">
+                            <Building2 className="w-4 h-4" />
+                            {sanitizeText(exp.company)}
+                          </p>
+                          {exp.location && (
+                            <span className="text-xs text-muted-foreground flex items-center gap-1">
+                              <MapPin className="w-3.5 h-3.5" />
+                              {sanitizeText(exp.location)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-semibold w-fit border border-border/60">
+                        <Calendar className="w-3.5 h-3.5 text-primary" />
+                        {sanitizeText(exp.duration)}
+                      </span>
+                    </div>
+
+                    {exp.description && (
+                      <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                        {sanitizeText(exp.description)}
+                      </p>
+                    )}
+
+                    {/* Key Achievements */}
+                    {achievements.length > 0 && (
+                      <div className="space-y-3 pt-2">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                          Key Responsibilities & Achievements:
+                        </h4>
+
+                        <div className="grid gap-2.5">
+                          {displayedAchievements.map((item, i) => {
+                            const parsed = parseAchievement(item);
+                            return (
+                              <div
+                                key={i}
+                                className="p-3.5 rounded-2xl bg-muted/40 border border-border/60 hover:border-primary/30 transition-all flex items-start gap-3"
+                              >
+                                <div className="mt-0.5 p-1 rounded-md bg-primary/10 text-primary shrink-0">
+                                  <CheckCircle2 className="w-3.5 h-3.5" />
+                                </div>
+                                <div className="text-xs sm:text-sm leading-relaxed">
+                                  {parsed.title && (
+                                    <span className="font-bold text-foreground block sm:inline sm:mr-1.5 text-xs sm:text-sm">
+                                      {parsed.title}:
+                                    </span>
+                                  )}
+                                  <span className="text-muted-foreground">{parsed.detail}</span>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {achievements.length > 2 && (
+                          <button
+                            type="button"
+                            onClick={() => toggleRoleAchievements(roleId)}
+                            className="mt-2 text-xs font-bold text-primary hover:text-primary/80 inline-flex items-center gap-1.5 py-1 px-3 rounded-lg hover:bg-primary/5 transition-colors"
+                          >
+                            {isExpanded ? (
+                              <>
+                                <ChevronUp className="w-3.5 h-3.5" />
+                                Show Less
+                              </>
+                            ) : (
+                              <>
+                                <ChevronDown className="w-3.5 h-3.5" />
+                                Show All ({achievements.length}) Achievements
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Technologies Used & Metrics */}
+                    {((exp.technologies && exp.technologies.length > 0) ||
+                      (exp.metrics && exp.metrics.length > 0)) && (
+                      <div className="pt-4 border-t border-border flex flex-wrap items-center justify-between gap-4">
+                        {exp.technologies && exp.technologies.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className="text-xs font-medium text-muted-foreground mr-1">Stack:</span>
+                            {exp.technologies.map((tech, i) => (
+                              <span
+                                key={i}
+                                className="px-2.5 py-1 rounded-lg bg-muted text-foreground text-xs font-mono font-medium border border-border"
+                              >
+                                {sanitizeText(tech)}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {exp.metrics && exp.metrics.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-2">
+                            {exp.metrics.map((metric, i) => (
+                              <span
+                                key={i}
+                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent border border-accent/20"
+                              >
+                                <TrendingUp className="w-3.5 h-3.5" />
+                                {sanitizeText(metric)}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

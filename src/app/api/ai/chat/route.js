@@ -20,6 +20,13 @@ export async function POST(request) {
       return `• ${p.title} (${p.category || 'General'}): ${p.description}. Tech: ${p.technologies?.join(', ') || 'N/A'}. Metrics: ${p.metrics?.join(', ') || 'N/A'}`;
     }).join('\n') || 'Various full-stack web and mobile applications';
 
+    const experienceList = portfolioData?.experience?.map((e) => {
+      const ach = e.achievements?.map((a) => `  - ${a}`).join('\n') || '';
+      const tech = e.technologies?.join(', ') || '';
+      const metrics = e.metrics?.join(', ') || '';
+      return `• ${e.position} at ${e.company} (${e.duration}, ${e.location || 'Remote'}):\n  ${e.description}${ach ? `\n  Key Achievements:\n${ach}` : ''}${tech ? `\n  Technologies: ${tech}` : ''}${metrics ? `\n  Impact: ${metrics}` : ''}`;
+    }).join('\n\n') || 'Senior software engineering experience across modern web and AI platforms';
+
     const systemPrompt = `You are the interactive AI Portfolio Copilot for ${developerName}, a ${title}.
 Your mission is to represent ${developerName} professionally, enthusiastically, and helpfully to recruiters, clients, and visitors.
 Answer their questions accurately based on the portfolio data below:
@@ -30,11 +37,15 @@ Skills: ${skillsList}
 Projects:
 ${projectsList}
 
+Work Experience:
+${experienceList}
+
 Guidelines:
 1. Be concise, polite, and articulate.
 2. Format answers with clean markdown (bullet points, bold text).
 3. If asked about hiring or contacting, provide the email (${email}) and encourage reaching out.
-4. If asked about a specific technology, reference any projects or skills matching it.`;
+4. If asked about a specific technology, reference any projects, experience, or skills matching it.
+5. If asked about work history, career, or past companies, highlight roles, achievements, and impact.`;
 
     if (apiKey) {
       try {
@@ -74,7 +85,30 @@ Guidelines:
     const lower = message.toLowerCase();
     let reply = '';
 
-    if (lower.includes('project') || lower.includes('work') || lower.includes('portfolio') || lower.includes('built')) {
+    if (lower.includes('experience') || lower.includes('career') || lower.includes('company') || lower.includes('companies') || lower.includes('job') || lower.includes('employment') || lower.includes('history') || (lower.includes('work') && !lower.includes('project'))) {
+      const experiences = portfolioData?.experience || [];
+      if (experiences.length > 0) {
+        reply = `Here is **${developerName}'s** professional work experience:\n\n` +
+          experiences.map((exp) => {
+            let details = `### **${exp.position}** — *${exp.company}*\n` +
+              `🗓️ ${exp.duration} | 📍 ${exp.location || 'Remote'}\n\n` +
+              `${exp.description}\n`;
+            if (exp.achievements && exp.achievements.length > 0) {
+              details += `\n**Key Achievements:**\n` + exp.achievements.map((a) => `• ${a}`).join('\n');
+            }
+            if (exp.technologies && exp.technologies.length > 0) {
+              details += `\n\n**Tech Stack:** ${exp.technologies.join(', ')}`;
+            }
+            if (exp.metrics && exp.metrics.length > 0) {
+              details += `\n**Impact:** ${exp.metrics.join(' • ')}`;
+            }
+            return details;
+          }).join('\n\n---\n\n') +
+          `\n\nFor more details, visit the **About** section of the portfolio!`;
+      } else {
+        reply = `**${developerName}** has extensive engineering experience across modern web and AI applications. Visit the **About** page to explore career highlights!`;
+      }
+    } else if (lower.includes('project') || lower.includes('portfolio') || lower.includes('built') || lower.includes('apps')) {
       const topProjects = portfolioData?.projects?.slice(0, 3) || [];
       reply = `Here are some standout projects by **${developerName}**:\n\n` +
         topProjects.map((p) => `• **${p.title}** (${p.category || 'Featured'}): ${p.description}\n  *Tech Stack:* ${p.technologies?.join(', ')}`).join('\n\n') +

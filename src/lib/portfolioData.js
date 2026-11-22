@@ -180,11 +180,33 @@ export const defaultPortfolioData = {
   experience: [
     {
       id: '1',
-      company: 'Tech Company',
-      position: 'Senior Developer',
-      duration: '2022 - Present',
-      description: 'Led development of multiple web applications',
-      location: 'Remote'
+      company: 'TechNova Solutions',
+      position: 'Senior Full Stack & AI Engineer',
+      duration: '2023 - Present',
+      location: 'San Francisco, CA (Remote)',
+      description: 'Architecting modern cloud-native web applications, leading AI-driven feature integration, and mentoring mid-level frontend and backend engineers.',
+      achievements: [
+        'Spearheaded the integration of Gemini LLM APIs, automating customer analytics and reducing manual triage time by 45%',
+        'Architected high-throughput micro-frontends in Next.js 15 and TypeScript, achieving sub-second page loads across 500k+ monthly active users',
+        'Implemented rigorous CI/CD test automation pipelines reducing staging regressions by 60%'
+      ],
+      technologies: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Gemini API', 'Tailwind CSS', 'PostgreSQL', 'Docker'],
+      metrics: ['45% Faster Workflows', '500k+ MAU', '99.95% System Uptime']
+    },
+    {
+      id: '2',
+      company: 'Apex Digital Labs',
+      position: 'Full Stack Software Engineer',
+      duration: '2021 - 2023',
+      location: 'New York, NY',
+      description: 'Designed and shipped high-conversion e-commerce workflows, reusable UI component systems, and scalable REST/GraphQL APIs.',
+      achievements: [
+        'Built enterprise design system adopted across 4 client product lines, decreasing UI delivery cycles by 35%',
+        'Engineered real-time inventory synchronization engine using WebSockets and Redis pub/sub',
+        'Optimized core web vitals and bundle splitting, elevating Lighthouse performance scores from 64 to 98'
+      ],
+      technologies: ['React', 'Node.js', 'Express', 'Firebase', 'GraphQL', 'Tailwind CSS', 'Jest'],
+      metrics: ['35% Faster Delivery', '+34 Lighthouse Score', '100k+ Daily API Requests']
     }
   ],
   education: [
