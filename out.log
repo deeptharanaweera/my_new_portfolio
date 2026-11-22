@@ -1,0 +1,10 @@
+   ▲ Next.js 15.5.3
+   - Local:        http://localhost:3005
+   - Network:      http://192.168.8.196:3005
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1958ms
+ ○ Compiling / ...
+ ✓ Compiled / in 6.8s (1745 modules)
+ GET / 200 in 7455ms

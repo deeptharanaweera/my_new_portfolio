@@ -234,7 +234,9 @@ const AdminDashboard = () => {
               {activeTab === 'projects' && (
                 <ProjectsForm
                   data={portfolioData.projects}
+                  categories={portfolioData.projectCategories}
                   onUpdate={(projects) => updateData('projects', projects)}
+                  onUpdateCategories={(categories) => updateData('projectCategories', categories)}
                 />
               )}
               
