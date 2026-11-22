@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Download, Github, Globe, Instagram, Linkedin, Mail, Twitter } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Hero = ({ personalInfo, socialLinks }) => {
   const scrollToSection = (sectionId) => {
@@ -85,24 +86,35 @@ const Hero = ({ personalInfo, socialLinks }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+          className="flex flex-wrap gap-4 justify-center items-center mb-12"
         >
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="px-8 py-3 bg-gradient-to-r from-violet-500 to-purple-500 border-2 border-gray-500 text-white rounded-full font-medium hover:opacity-90 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring"
+          <Link
+            href="/projects"
+            className="px-7 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg shadow-primary/20"
           >
-            <Mail className="w-5 h-5" />
-            Get In Touch
-          </button>
+            <span>Explore Projects</span>
+            <ChevronDown className="w-4 h-4 -rotate-90" />
+          </Link>
+
+          <Link
+            href="/contact"
+            className="px-7 py-3 bg-card border-2 border-border text-foreground rounded-full font-semibold hover:bg-muted transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+          >
+            <Mail className="w-4 h-4 text-primary" />
+            <span>Get In Touch</span>
+          </Link>
           
-          <a
-            href={personalInfo.resume}
-            download
-            className="px-8 py-3 border-2 border-border text-foreground rounded-full font-medium hover:bg-muted transition-all duration-300 transform hover:scale-105 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            <Download className="w-5 h-5" />
-            Download Resume
-          </a>
+          {personalInfo.resume && (
+            <a
+              href={personalInfo.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 border border-border text-muted-foreground hover:text-foreground rounded-full font-medium hover:bg-muted transition-all duration-300 flex items-center gap-2 text-sm"
+            >
+              <Download className="w-4 h-4" />
+              <span>Resume</span>
+            </a>
+          )}
         </motion.div>
 
         <motion.div
